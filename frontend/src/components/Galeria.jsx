@@ -8,7 +8,7 @@ function Galeria ({ products }) {
   const navigate = useNavigate()
 
   const handlerClick = (id) => {
-    navigate(`/product/${id}`)
+    navigate(`/products/${id}`)
   }
 
   return (

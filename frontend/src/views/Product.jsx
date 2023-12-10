@@ -1,32 +1,32 @@
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Button, Card, Container } from 'react-bootstrap'
 import MichiContext from '../context/MichiContex.jsx'
 
 const Product = () => {
   const { id } = useParams()
-  const { productos, addCart } = useContext(MichiContext)
-  const [producto, setProducto] = useState()
-
-  const filterProducto = () => {
-    const [findProducto] = productos.filter((producto) => producto.id === id)
-    setProducto(findProducto)
-  }
+  const { addCart } = useContext(MichiContext)
+  const [producto, setProducto] = useState(null)
 
   useEffect(() => {
-    filterProducto()
+    // Realizar una solicitud al backend para obtener los detalles del producto
+    fetch(`http://localhost:3000/products/${id}`) // Asegúrate de que esta URL coincida con la ruta de tu backend
+      .then(response => response.json())
+      .then(data => setProducto(data[0])) // Modificación aquí: acceder al primer elemento del array
+      .catch(error => console.error('Error:', error))
   }, [id])
 
-  if (!producto) return <div>Producto no disponible</div>
+  // Mostrar un mensaje mientras se carga el producto
+  if (!producto) return <div>Cargando detalles del producto...</div>
 
   return (
     <Container fluid className='producto'>
       <Card className='galeria_one_card'>
-        <Card.Img variant='top' src={producto?.img} />
+        <Card.Img variant='top' src={producto.img} />
         <Card.Body>
-          <Card.Title>{producto?.titulo}</Card.Title>
+          <Card.Title>{producto.titulo}</Card.Title>
           <Card.Text className='text-success'>
-            Precio: $ {producto?.precio}
+            Precio: $ {producto.precio}
           </Card.Text>
           <p className='text-dark'>{producto.descripcion}</p>
           <Button
@@ -37,7 +37,6 @@ const Product = () => {
           </Button>
         </Card.Body>
       </Card>
-
     </Container>
   )
 }

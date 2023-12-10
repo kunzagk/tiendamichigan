@@ -39,7 +39,7 @@ function App () {
             element={<PublicRoute><Register /></PublicRoute>}
           />
           <Route
-            path='/product/:id'
+            path='/products/:id'
             element={<PublicRoute><Product /></PublicRoute>}
           />
           <Route
