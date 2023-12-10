@@ -12,3 +12,13 @@ export const getProducts = (req, res) => {
     })
     .catch((error) => res.status(HTTP_STATUS.internal_server_error.code).json(error))
 }
+
+
+// crear un nuevo producto
+export const newProduct = (req, res) => {
+  const {titulo, img, descripcion, precio } = req.body
+  console.log(titulo, img, descripcion, precio)
+  sql.createProduct(titulo, img, descripcion, precio)
+    .then(([product]) => res.status(HTTP_STATUS.created.code).json({ id: product.id,titulo: product.titulo, precio: product.precio }))
+    .catch((error) => res.status(HTTP_STATUS.internal_server_error.code).json(error))
+}
