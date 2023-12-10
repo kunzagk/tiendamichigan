@@ -6,7 +6,6 @@ const router = express.Router()
 
 router.post('/register', usuarios.register)
 router.post('/login', usuarios.login)
-
 router.get('/profile', verifyToken, usuarios.returnUser)
 
 export default router

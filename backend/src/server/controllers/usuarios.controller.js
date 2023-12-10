@@ -6,6 +6,7 @@ import { encrypt, compare } from '../../utils/cryps.js'
 // registrar un usuario
 export const register = (req, res) => {
   const { nombre, email, password } = req.body
+  console.log(nombre, email, password )
   const passEncrypted = encrypt(password)
   sql.createUser(nombre, email, passEncrypted)
     .then(([user]) => res.status(HTTP_STATUS.created.code).json({ id: user.id, email: user.email }))
