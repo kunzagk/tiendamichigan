@@ -25,22 +25,16 @@ describe('Server de tienda Michigan', () => {
     const response = await request(app).get('/products').set('authorization', tokenTest).send()
 
     expect(response.statusCode).toEqual(HTTP_STATUS.ok.code)
-    expect(response.body).toContain('token')
+    expect(response.body).toBeInstanceOf(Array)
   })
-  /* test('[POST] /register | agrega un nuevo usuario y devuelve un código 201.', async () => {
-    const idTest = 123
-    const usuario = {
-      idTest,
-      nombre: 'Fer',
-      email: 'fernanda.nunez55@gmail.com',
-      password: '1234'
-    }
-    const response = await request(app).post('/register').send(usuario)
+  test('[POST] /register | registra un nuevo usuario y devuelve un código 201.', async () => {
+    const usuario = { id: 15, email: 'lala@gmail.com' }
+    const response = await request(app).post('/cafes').send(usuario)
 
     expect(response.statusCode).toEqual(HTTP_STATUS.created.code)
     expect(response.body).toEqual(expect.arrayContaining([usuario]))
   })
-   test('[POST] /products | agrega un nuevo producto y devuelve un código 201.', async () => {
+  test('[POST] /products | agrega un nuevo producto y devuelve un código 201.', async () => {
     const idTest = 651982
     const producto = {
       idTest,
@@ -53,5 +47,5 @@ describe('Server de tienda Michigan', () => {
 
     expect(response.statusCode).toEqual(HTTP_STATUS.created.code)
     expect(response.body).toEqual(expect.arrayContaining([producto]))
-  }) */
+  })
 })
