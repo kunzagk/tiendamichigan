@@ -9,9 +9,9 @@ const Product = () => {
   const [producto, setProducto] = useState(null)
 
   useEffect(() => {
-    const baseUrl = import.meta.env.VITE_URLBASE;
+    const baseUrl = import.meta.env.VITE_URLBASE
 
-    fetch(${baseUrl}/products/${id}) // Usar baseUrl
+    fetch(`${baseUrl}/products/${id}`) 
       .then(response => response.json())
       .then(data => setProducto(data[0]))
       .catch(error => console.error('Error:', error))
